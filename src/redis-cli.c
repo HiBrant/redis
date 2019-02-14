@@ -4723,7 +4723,8 @@ assign_replicas:
     }
     clusterManagerOptimizeAntiAffinity(ip_nodes, ip_count);
     clusterManagerShowNodes();
-    if (confirmWithYes("Can I set the above configuration?")) {
+    if ((config.cluster_manager_command.flags & CLUSTER_MANAGER_CMD_FLAG_YES) || 
+        confirmWithYes("Can I set the above configuration?")) {
         listRewind(cluster_manager.nodes, &li);
         while ((ln = listNext(&li)) != NULL) {
             clusterManagerNode *node = ln->value;
